@@ -1,0 +1,3 @@
+var GS = {
+	gameIsOver: false,
+}
