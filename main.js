@@ -1,4 +1,6 @@
 function main(){
+	GS.mainCycleCount++;
+	console.log("Entering main() [Cycle="+GS.mainCycleCount+"]");
 
 	if(GS.gameIsOver === true){
 		// End game, show score, play again?
@@ -11,5 +13,5 @@ function main(){
 	// move block
 
 
-
+	console.log("Exiting main() [Cycle="+GS.mainCycleCount+"]");
 }

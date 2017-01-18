@@ -5,9 +5,17 @@
 	<script src="jquery-3.1.1.min.js"></script>
 
 	<!-- My Scripts -->
+	<script src="config.js"></script>
 	<script src="gameState.js"></script>
+	<script src="functions.js"></script>
 	<script src="main.js"></script>
 </head>
 <body>
+
+	<!-- Kick off Script -->
+	<script>
+		console.log("Starting recurring timeout for main loop.");
+		setInterval(main, Config.mainLoopSpeed);
+	</script>
 </body>
 </html>

@@ -4,4 +4,42 @@
 
 
 - board should be about 10x20
+- should make loging function that indents as it steps in and out of functions
 - pu@ create a block and start making it move.
+
+
+/// SHAPES ///////////////////////////////////////
+
+1)
+-----
+0
+o
+00
+-----
+
+2)
+-----
+0
+o0
+0
+-----
+
+3)
+-----
+0
+0
+o
+0
+-----
+
+4)
+-----
+00
+00
+-----
+
+5)
+-----
+00
+ o0
+-----
