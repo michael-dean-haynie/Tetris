@@ -15,7 +15,7 @@
 	<!-- Kick off Script -->
 	<script>
 		console.log("Starting recurring timeout for main loop.");
-		setInterval(main, Config.mainLoopSpeed);
+		GS.mainLoopInterval = setInterval(main, Config.mainLoopSpeed);
 	</script>
 </body>
 </html>
