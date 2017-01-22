@@ -1,6 +1,7 @@
 function main(){
+	GS.gameIsOver = true;
 	GS.mainCycleCount++;
-	console.log("Entering main() [Cycle="+GS.mainCycleCount+"]");
+	// console.log("Entering main() [Cycle="+GS.mainCycleCount+"]");
 
 	if(GS.gameIsOver === false){
 		if(GS.activeBlockIndex === null){
@@ -24,5 +25,5 @@ function main(){
 	// console.log("GS.blocks.length = " + GS.blocks.length);
 	// console.log("ActiveBlockHandlePoint:");
 	// console.log(GS.blocks[GS.activeBlockIndex].handlePoint);
-	console.log("Exiting main() [Cycle="+GS.mainCycleCount+"]");
+	// console.log("Exiting main() [Cycle="+GS.mainCycleCount+"]");
 }
