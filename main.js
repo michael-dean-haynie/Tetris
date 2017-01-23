@@ -3,7 +3,7 @@ function main(){
 	GS.mainCycleCount++;
 	// console.log("Entering main() [Cycle="+GS.mainCycleCount+"]");
 
-	if(GS.gameIsOver === false){
+	if(!GS.gameIsOver){
 		if(GS.activeBlockIndex === null){
 			addBlock();
 		}
@@ -17,13 +17,11 @@ function main(){
 
 		paintBoard();
 
+		GS.gameIsOver = checkIsGameOver();
 
 	} else {
 		clearInterval(GS.mainLoopInterval);
+		console.log("Game Over");
 		// display game over and points
 	}
-	// console.log("GS.blocks.length = " + GS.blocks.length);
-	// console.log("ActiveBlockHandlePoint:");
-	// console.log(GS.blocks[GS.activeBlockIndex].handlePoint);
-	// console.log("Exiting main() [Cycle="+GS.mainCycleCount+"]");
 }

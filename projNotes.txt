@@ -3,7 +3,7 @@
 --------------------------------------------------
 - board should be about 10x20
 - should make loging function that indents as it steps in and out of functions
-- pu@ create a block and start making it move.
+- pu@  make the size of the board truly dynamic, show line where blocks cant go over (probably paint it in every paint method?), add game over text and points and position the canvas/board
 
 
 /// SHAPES ///////////////////////////////////////

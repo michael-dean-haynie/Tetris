@@ -116,3 +116,17 @@ function tryDropActiveBlock(){
 	GS.disableUserControl = false;
 	return doesWork;
 }
+
+function checkIsGameOver(){
+	var blocks = GS.blocks;
+	for(var i = 0; i < blocks.length; i++){
+		if (i != GS.activeBlockIndex){
+			var points = getPointsForBlock(blocks[i]);
+			for(var e = 0; e < points.length; e++){
+				var p = points[e];
+				if(p.y > 19){ return true;}
+			}
+		}
+	}
+	return false;
+}
