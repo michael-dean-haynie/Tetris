@@ -1,6 +1,5 @@
 function addBlock(){
-	// var shapes = ["L", "T", "I", "O", "Z"];
-	var shapes = ["O"];
+	var shapes = ["L", "T", "I", "O", "Z"];
 	var shapesToStartingHandlePoints = {L:{x:3,y:21},T:{x:3,y:21},I:{x:3,y:21},O:{x:3,y:20},Z:{x:4,y:20}};
 	var shape = shapes[Math.floor(Math.random()*shapes.length)];
 	var newActiveBlockIndex = GS.blocks.length;
@@ -24,7 +23,7 @@ function getPointsForBlock(block){
 		case "L":
 			switch (block.possition){
 				case 0:
-					return [hp,{x:hp.x,y:hp.y+1},{x:hp.x,y:hp.x-1},{x:hp.x+1,y:hp.y-1}];break;
+					return [hp,{x:hp.x,y:hp.y+1},{x:hp.x,y:hp.y-1},{x:hp.x+1,y:hp.y-1}];break;
 				case 1:
 					return [hp,{x:hp.x+1,y:hp.y},{x:hp.x-1,y:hp.y},{x:hp.x-1,y:hp.y-1}];break;
 				case 2:
@@ -55,7 +54,7 @@ function getPointsForBlock(block){
 					return [hp,{x:hp.x+2,y:hp.y},{x:hp.x+1,y:hp.y},{x:hp.x-1,y:hp.y}];break;
 			}break;
 
-		case "0":
+		case "O":
 			switch (block.possition){
 				case 0:
 				case 1:
