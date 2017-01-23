@@ -25,12 +25,20 @@ function paintBlock(block){
 	}
 }
 
+function clearBlock(block){
+	var points = getPointsForBlock(block);
+	for(var i = 0; i < points.length; i++){
+		var p = points[i] // p => point
+		clearPoint(p.x, p.y);
+	}
+}
+
 function clearBoard(){
 	Config.ctx.clearRect(0, 0, Config.canvas.width, Config.canvas.height);
 }
 
 function paintBoard (){
-	console.log("Entering paintboard()");
+	// console.log("Entering paintboard()");
 	clearBoard();
 
 	for(var i = 0; i < GS.blocks.length; i++){

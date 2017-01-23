@@ -1,7 +1,7 @@
 function main(){
 	// GS.gameIsOver = true;
 	GS.mainCycleCount++;
-	console.log("Entering main() [Cycle="+GS.mainCycleCount+"]");
+	// console.log("Entering main() [Cycle="+GS.mainCycleCount+"]");
 
 	if(GS.gameIsOver === false){
 		if(GS.activeBlockIndex === null){

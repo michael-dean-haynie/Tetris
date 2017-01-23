@@ -9,7 +9,7 @@ function addBlock(){
 		index: newActiveBlockIndex,
 		shape: shape,
 		handlePoint: shapesToStartingHandlePoints[shape],
-		possition: 0,
+		position: 0,
 		color: color
 	}
 
@@ -21,31 +21,31 @@ function getPointsForBlock(block){
 	var hp = block.handlePoint;
 	switch (block.shape){
 		case "L":
-			switch (block.possition){
+			switch (block.position){
 				case 0:
 					return [hp,{x:hp.x,y:hp.y+1},{x:hp.x,y:hp.y-1},{x:hp.x+1,y:hp.y-1}];break;
 				case 1:
 					return [hp,{x:hp.x+1,y:hp.y},{x:hp.x-1,y:hp.y},{x:hp.x-1,y:hp.y-1}];break;
 				case 2:
-					return [hp,{x:hp.x,y:hp.y+1},{x:hp.x,y:hp.x-1},{x:hp.x-1,y:hp.y+1}];break;
+					return [hp,{x:hp.x,y:hp.y+1},{x:hp.x,y:hp.y-1},{x:hp.x-1,y:hp.y+1}];break;
 				case 3:
 					return [hp,{x:hp.x+1,y:hp.y},{x:hp.x-1,y:hp.y},{x:hp.x+1,y:hp.y+1}];break;
 			}break;
 
 		case "T":
-			switch (block.possition){
+			switch (block.position){
 				case 0:
 					return [hp,{x:hp.x,y:hp.y+1},{x:hp.x+1,y:hp.y},{x:hp.x,y:hp.y-1}];break;
 				case 1:
-					return [hp,{x:hp.x-1,y:hp.y},{x:hp.x-1,y:hp.y},{x:hp.x,y:hp.y-1}];break;
+					return [hp,{x:hp.x-1,y:hp.y},{x:hp.x,y:hp.y-1},{x:hp.x+1,y:hp.y}];break;
 				case 2:
-					return [hp,{x:hp.x,y:hp.y+1},{x:hp.x+1,y:hp.y},{x:hp.x,y:hp.y-1}];break;
+					return [hp,{x:hp.x,y:hp.y+1},{x:hp.x-1,y:hp.y},{x:hp.x,y:hp.y-1}];break;
 				case 3:
-					return [hp,{x:hp.x-1,y:hp.y},{x:hp.x-1,y:hp.y},{x:hp.x,y:hp.y+1}];break;
+					return [hp,{x:hp.x-1,y:hp.y},{x:hp.x,y:hp.y+1},{x:hp.x+1,y:hp.y}];break;
 			}break;
 
 		case "I":
-			switch (block.possition){
+			switch (block.position){
 				case 0:
 				case 2:
 					return [hp,{x:hp.x,y:hp.y+2},{x:hp.x,y:hp.y+1},{x:hp.x,y:hp.y-1}];break;
@@ -55,7 +55,7 @@ function getPointsForBlock(block){
 			}break;
 
 		case "O":
-			switch (block.possition){
+			switch (block.position){
 				case 0:
 				case 1:
 				case 2:
@@ -64,7 +64,7 @@ function getPointsForBlock(block){
 			}break;
 
 			case "Z":
-				switch (block.possition){
+				switch (block.position){
 					case 0:
 					case 2:
 						return [hp,{x:hp.x-1,y:hp.y+1},{x:hp.x,y:hp.y+1},{x:hp.x+1,y:hp.y}];break;
@@ -113,6 +113,6 @@ function tryDropActiveBlock(){
 	var doesWork = checkNewPoints(newPoints);
 	block.handlePoint.y++;
 
+	GS.disableUserControl = false;
 	return doesWork;
-	// re enable user control
 }
