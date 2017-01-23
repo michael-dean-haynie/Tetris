@@ -1,7 +1,7 @@
 function main(){
-	GS.gameIsOver = true;
+	// GS.gameIsOver = true;
 	GS.mainCycleCount++;
-	// console.log("Entering main() [Cycle="+GS.mainCycleCount+"]");
+	console.log("Entering main() [Cycle="+GS.mainCycleCount+"]");
 
 	if(GS.gameIsOver === false){
 		if(GS.activeBlockIndex === null){
@@ -10,12 +10,12 @@ function main(){
 
 		var doesWork = tryDropActiveBlock();
 		if (doesWork){
-			GS.blocks[GS.activeBlockIndex].y--;
+			GS.blocks[GS.activeBlockIndex].handlePoint.y--;
 		} else {
 			GS.activeBlockIndex = null;
 		}
 
-		// Paint board
+		paintBoard();
 
 
 	} else {

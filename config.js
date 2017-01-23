@@ -1,5 +1,5 @@
 var Config = {
-	mainLoopSpeed: 1000,
+	mainLoopSpeed: 100,
 	canvas : null,
 	ctx : null,
 	pointSize: 30,

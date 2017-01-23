@@ -1,14 +1,17 @@
 function addBlock(){
-	var shapes = ["L", "T", "I", "O", "Z"];
+	// var shapes = ["L", "T", "I", "O", "Z"];
+	var shapes = ["O"];
 	var shapesToStartingHandlePoints = {L:{x:3,y:21},T:{x:3,y:21},I:{x:3,y:21},O:{x:3,y:20},Z:{x:4,y:20}};
 	var shape = shapes[Math.floor(Math.random()*shapes.length)];
 	var newActiveBlockIndex = GS.blocks.length;
+	var color = Config.fillColors[Math.floor(Math.random()*Config.fillColors.length)];
 
 	var newBlock = {
 		index: newActiveBlockIndex,
 		shape: shape,
 		handlePoint: shapesToStartingHandlePoints[shape],
-		possition: 0
+		possition: 0,
+		color: color
 	}
 
 	GS.blocks.push(newBlock);
@@ -104,11 +107,13 @@ function checkNewPoints(points){ // returns true if it's good, false if it's not
 
 function tryDropActiveBlock(){
 	GS.disableUserControl = true;
-	var newBlock = GS.blocks[GS.activeBlockIndex]
-	newBlock.handlePoint.y--;
+	var block = GS.blocks[GS.activeBlockIndex];
 
-	var newPoints = getPointsForBlock(newBlock);
+	block.handlePoint.y--;
+	var newPoints = getPointsForBlock(block);
 	var doesWork = checkNewPoints(newPoints);
+	block.handlePoint.y++;
+
 	return doesWork;
 	// re enable user control
 }

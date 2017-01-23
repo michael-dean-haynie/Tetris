@@ -1,8 +1,6 @@
 --------------------------------------------------
 --- PROJECT NOTES --------------------------------
 --------------------------------------------------
-
-
 - board should be about 10x20
 - should make loging function that indents as it steps in and out of functions
 - pu@ create a block and start making it move.

@@ -16,3 +16,24 @@ function clearPoint(x, y){
 
 	Config.ctx.clearRect(cx, cy, Config.pointSize, Config.pointSize);
 }
+
+function paintBlock(block){
+	var points = getPointsForBlock(block);
+	for(var i = 0; i < points.length; i++){
+		var p = points[i] // p => point
+		paintPoint(p.x, p.y, block.color);
+	}
+}
+
+function clearBoard(){
+	Config.ctx.clearRect(0, 0, Config.canvas.width, Config.canvas.height);
+}
+
+function paintBoard (){
+	console.log("Entering paintboard()");
+	clearBoard();
+
+	for(var i = 0; i < GS.blocks.length; i++){
+		paintBlock(GS.blocks[i]);
+	}
+}
