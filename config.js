@@ -1,10 +1,10 @@
 var Config = {
-	mainLoopSpeed: 100,
+	mainLoopSpeed: 500,
 	canvas : null,
 	ctx : null,
 	pointSize: 30,
 	boardWidth: 10,
-	boardHeight: 24,
+	boardHeight: 24, // playable area + 4
 	fillColors: ["red", "blue", "green", "orange", "brown", "purple", "yellow"],
 	strokeColor: "black",
 	lineWidth: 1

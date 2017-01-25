@@ -1,6 +1,9 @@
 function addBlock(){
 	var shapes = ["L", "T", "I", "O", "Z"];
-	var shapesToStartingHandlePoints = {L:{x:3,y:21},T:{x:3,y:21},I:{x:3,y:21},O:{x:3,y:20},Z:{x:4,y:20}};
+	var xs = Math.floor(Config.boardWidth/2); // x start offset
+	var ys = Config.boardHeight - 3; // y start offset
+	var shapesToStartingHandlePoints = {L:{x:xs,y:ys},T:{x:xs,y:ys},I:{x:xs,y:ys},O:{x:xs,y:ys-1},Z:{x:xs,y:ys-1}};
+
 	var shape = shapes[Math.floor(Math.random()*shapes.length)];
 	var newActiveBlockIndex = GS.blocks.length;
 	var color = Config.fillColors[Math.floor(Math.random()*Config.fillColors.length)];
@@ -85,8 +88,8 @@ function checkNewPoints(points){ // returns true if it's good, false if it's not
 		// Check that none have x < 0
 		if (newPoint.x < 0){return false;}
 
-		// Check that none have x > 9
-		if (newPoint.x > 9){return false;}
+		// Check that none have x > Config.boardWidth - 1
+		if (newPoint.x > (Config.boardWidth - 1)){return false;}
 
 		// Check against other points of inactive blocks
 		for(var b = 0; b < GS.blocks.length; b++){ // b => blocks index
@@ -124,7 +127,7 @@ function checkIsGameOver(){
 			var points = getPointsForBlock(blocks[i]);
 			for(var e = 0; e < points.length; e++){
 				var p = points[e];
-				if(p.y > 19){ return true;}
+				if(p.y > (Config.boardHeight - 4 - 1)){ return true;}
 			}
 		}
 	}

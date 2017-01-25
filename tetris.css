@@ -1,0 +1,21 @@
+body {
+	text-align: center;
+	background-color:white;
+	font-family: Arial;
+}
+
+.canvas-container {
+	display: inline-block;
+	background-color:white;
+	text-align:right;
+}
+
+#canvas{
+	border:1px solid black;
+}
+
+.score{
+	margin:0;
+	font-size:.75;
+	font-weight:bold;
+}

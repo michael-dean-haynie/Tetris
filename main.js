@@ -15,6 +15,8 @@ function main(){
 			GS.activeBlockIndex = null;
 		}
 
+		checkForFullRows();
+
 		paintBoard();
 
 		GS.gameIsOver = checkIsGameOver();
