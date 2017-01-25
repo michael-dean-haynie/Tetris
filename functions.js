@@ -133,3 +133,43 @@ function checkIsGameOver(){
 	}
 	return false;
 }
+
+// function checkForFullRows(){
+// 	// Iterate through non active points and increment the row count for the row that the point is in (y) then see which rows are full
+
+
+// 	// Build up row counts
+// 	var rowCounts = Array(Config.boardHeight - 4); // initialize with as many elements as needed
+// 	var rowcounts = rowcounts.fill(0); // set elements to 0
+
+// 	var blocks = GS.blocks;
+// 	for (var bi = 0; bi < blocks.length; bi++){ // bi => blocks index
+// 		if (bi != Config.activeBlockIndex){
+// 			var b = blocks[bi]; // b => block
+// 			var points = getPointsForBlock(b);
+// 			for (var pi = 0; pi < points.length; pi++){ // pi -> points index
+// 				var p = points[p] // p => point
+// 				rowCounts[p.y]++;
+// 			}
+// 		}
+// 	}
+
+
+// 	// remove rows that are full
+// 	var removedRows = [];
+// 	for (var rci = 0; rci < rowCounts.length; rci++){ // rci => rowCount index
+// 		var c = rowCounts[rci]; // c => count
+// 		if(c === Config.boardWidth){
+// 			removeRow(rci);
+// 			addPoints(Config.boardWidth);
+// 			removedRows.push(rci);
+// 		}
+// 	}
+
+// 	// scrunch rest of rows down
+// 	removedRows.sort();
+// 	for (var rri = 0; rri < removedRows.length; rri++){ // rri => removedRows index
+// 		var r = removedRows[rri]; // r => row
+		
+// 	}
+// }

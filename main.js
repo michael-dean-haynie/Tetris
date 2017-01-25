@@ -15,7 +15,7 @@ function main(){
 			GS.activeBlockIndex = null;
 		}
 
-		checkForFullRows();
+		// checkForFullRows();
 
 		paintBoard();
 
