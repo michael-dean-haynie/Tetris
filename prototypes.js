@@ -1,249 +1,80 @@
-function Point(x, y, id = null){
+function Point(x, y, active = true){
 	this.x = x;
 	this.y = y;
-	this.id = id;
-}
+	this.active = active;
 
-function Block(shape, position, cp){ // cp => centerPoint
-
-	// Fill points
-	var willbe_points = new Array(4).fill(null);
-	switch(shape){
-		case "I":
-			switch(position){
-				case 0:
-					willbe_points[0] = new Point(cp.x+(0), cp.y+(2),  0);
-					willbe_points[1] = new Point(cp.x+(0), cp.y+(1),  1);
-					willbe_points[2] = new Point(cp.x+(0), cp.y+(0),  2);
-					willbe_points[3] = new Point(cp.x+(0), cp.y+(-1), 3);
-					break;
-
-				case 1:
-					willbe_points[0] = new Point(cp.x+(2),  cp.y+(0), 0);
-					willbe_points[1] = new Point(cp.x+(1),  cp.y+(0), 1);
-					willbe_points[2] = new Point(cp.x+(0),  cp.y+(0), 2);
-					willbe_points[3] = new Point(cp.x+(-1), cp.y+(0), 3);
-					break;
-
-				case 2:
-					willbe_points[0] = new Point(cp.x+(0), cp.y+(-1), 0);
-					willbe_points[1] = new Point(cp.x+(0), cp.y+(0),  1);
-					willbe_points[2] = new Point(cp.x+(0), cp.y+(1),  2);
-					willbe_points[3] = new Point(cp.x+(0), cp.y+(2),  3);
-					break;
-
-				case 3:
-					willbe_points[0] = new Point(cp.x+(-1), cp.y+(0), 0);
-					willbe_points[1] = new Point(cp.x+(0),  cp.y+(0), 1);
-					willbe_points[2] = new Point(cp.x+(1),  cp.y+(0), 2);
-					willbe_points[3] = new Point(cp.x+(2),  cp.y+(0), 3);
-					break;
-			}
-			break;
-
-    case "J":
-      switch(position){
-        case 0:
-          willbe_points[0] = new Point(cp.x+(0),  cp.y+(1),  0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0),  cp.y+(-1), 2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(-1), 3);
-          break;
-
-        case 1:
-          willbe_points[0] = new Point(cp.x+(0), cp.y+(0), 0);
-          willbe_points[1] = new Point(cp.x+(0), cp.y+(0), 1);
-          willbe_points[2] = new Point(cp.x+(0), cp.y+(0), 2);
-          willbe_points[3] = new Point(cp.x+(0), cp.y+(0), 3);
-          break;
-
-        case 2:
-          willbe_points[0] = new Point(cp.x+(1),  cp.y+(0), 0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0), 1);
-          willbe_points[2] = new Point(cp.x+(-1), cp.y+(0), 2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(1), 3);
-          break;
-
-        case 3:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(0),  0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(1),  cp.y+(0),  2);
-          willbe_points[3] = new Point(cp.x+(1),  cp.y+(-1), 3);
-          break;
-      }
-      break;
-
-    case "L":
-      switch(position){
-        case 0:
-          willbe_points[0] = new Point(cp.x+(0), cp.y+(1),  0);
-          willbe_points[1] = new Point(cp.x+(0), cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0), cp.y+(-1), 2);
-          willbe_points[3] = new Point(cp.x+(1), cp.y+(-1), 3);
-          break;
-
-        case 1:
-          willbe_points[0] = new Point(cp.x+(1),  cp.y+(0),  0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(-1), cp.y+(0),  2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(-1), 3);
-          break;
-
-        case 2:
-          willbe_points[0] = new Point(cp.x+(0),  cp.y+(-1), 0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0),  cp.y+(1),  2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(1),  3);
-          break;
-
-        case 3:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(0), 0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0), 1);
-          willbe_points[2] = new Point(cp.x+(1),  cp.y+(0), 2);
-          willbe_points[3] = new Point(cp.x+(1),  cp.y+(1), 3);
-          break;
-      }
-      break;
-
-    case "O":
-      switch(position){
-        case 0:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(0),  0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0),  cp.y+(-1), 2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(-1), 3);
-          break;
-
-        case 1:
-          willbe_points[0] = new Point(cp.x+(0),  cp.y+(0),  0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(-1), 1);
-          willbe_points[2] = new Point(cp.x+(-1), cp.y+(-1), 2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(0),  3);
-          break;
-
-        case 2:
-          willbe_points[0] = new Point(cp.x+(0),  cp.y+(-1), 0);
-          willbe_points[1] = new Point(cp.x+(-1), cp.y+(-1), 1);
-          willbe_points[2] = new Point(cp.x+(-1), cp.y+(0),  2);
-          willbe_points[3] = new Point(cp.x+(0),  cp.y+(0),  3);
-          break;
-
-        case 3:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(-1), 0);
-          willbe_points[1] = new Point(cp.x+(-1), cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0),  cp.y+(0),  2);
-          willbe_points[3] = new Point(cp.x+(0),  cp.y+(-1), 3);
-          break;
-      }
-      break;
-
-    case "S":
-      switch(position){
-        case 0:
-          willbe_points[0] = new Point(cp.x+(1),  cp.y+(0),  0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0),  cp.y+(-1), 2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(-1), 3);
-          break;
-
-        case 1:
-          willbe_points[0] = new Point(cp.x+(0),  cp.y+(-1), 0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(-1), cp.y+(0),  2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(1),  3);
-          break;
-
-        case 2:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(-1), 0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(-1), 1);
-          willbe_points[2] = new Point(cp.x+(0),  cp.y+(0),  2);
-          willbe_points[3] = new Point(cp.x+(1),  cp.y+(0),  3);
-          break;
-
-        case 3:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(1),  0);
-          willbe_points[1] = new Point(cp.x+(-1), cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0),  cp.y+(0),  2);
-          willbe_points[3] = new Point(cp.x+(0),  cp.y+(-1), 3);
-          break;
-      }
-      break;
-
-    case "T":
-      switch(position){
-        case 0:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(0),  0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(1),  cp.y+(0),  2);
-          willbe_points[3] = new Point(cp.x+(0),  cp.y+(-1), 3);
-          break;
-
-        case 1:
-          willbe_points[0] = new Point(cp.x+(0),  cp.y+(1),  0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0),  cp.y+(-1), 2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(0),  3);
-          break;
-
-        case 2:
-          willbe_points[0] = new Point(cp.x+(1),  cp.y+(0), 0);
-          willbe_points[1] = new Point(cp.x+(0),  cp.y+(0), 1);
-          willbe_points[2] = new Point(cp.x+(-1), cp.y+(0), 2);
-          willbe_points[3] = new Point(cp.x+(0),  cp.y+(1), 3);
-          break;
-
-        case 3:
-          willbe_points[0] = new Point(cp.x+(0), cp.y+(-1), 0);
-          willbe_points[1] = new Point(cp.x+(0), cp.y+(0),  1);
-          willbe_points[2] = new Point(cp.x+(0), cp.y+(1),  2);
-          willbe_points[3] = new Point(cp.x+(1), cp.y+(0),  3);
-          break;
-      }
-      break;
-
-    case "Z":
-      switch(position){
-        case 0:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(0) , 0);
-          willbe_points[1] = new Point(cp.x+(0) , cp.y+(0) , 1);
-          willbe_points[2] = new Point(cp.x+(0) , cp.y+(-1), 2);
-          willbe_points[3] = new Point(cp.x+(1) , cp.y+(-1), 3);
-          break;
-
-        case 1:
-          willbe_points[0] = new Point(cp.x+(0) , cp.y+(1) , 0);
-          willbe_points[1] = new Point(cp.x+(0) , cp.y+(0) , 1);
-          willbe_points[2] = new Point(cp.x+(-1), cp.y+(0) , 2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(-1), 3);
-          break;
-
-        case 2:
-          willbe_points[0] = new Point(cp.x+(1) , cp.y+(-1), 0);
-          willbe_points[1] = new Point(cp.x+(0) , cp.y+(-1), 1);
-          willbe_points[2] = new Point(cp.x+(0) , cp.y+(0) , 2);
-          willbe_points[3] = new Point(cp.x+(-1), cp.y+(0) , 3);
-          break;
-
-        case 3:
-          willbe_points[0] = new Point(cp.x+(-1), cp.y+(-1), 0);
-          willbe_points[1] = new Point(cp.x+(-1), cp.y+(0) , 1);
-          willbe_points[2] = new Point(cp.x+(0) , cp.y+(0) , 2);
-
-          willbe_points[3] = new Point(cp.x+(0) , cp.y+(1) , 3);
-          break;
-      }
-      break;
+	this.clone = function(){
+		return new Point(this.x, this.y, this.active);
 	}
 
+	this.applyOffset = function (x, y){
+		return new Point(x+this.x, y+this.y, this.active);
+	}
+
+	this.getCtxOffset = function(){
+		var cx = Config.pointSize * this.x; // canvas x offset
+		var cy = (((Config.boardHeight + Config.boardStagingHeight) - 1) - this.y) * Config.pointSize; // canvas y offset
+		return new Point(cx, cy);
+	}
+
+	this.paint = function(color){
+		var o = this.getCtxOffset(); // o => offset
+		Config.ctx.fillStyle = color;
+
+		if (this.active === true){
+			Config.ctx.fillRect(o.x, o.y, Config.pointSize, Config.pointSize);
+			Config.ctx.strokeRect(o.x+1, o.y+1, Config.pointSize-2, Config.pointSize-2);
+		}
+	}
+
+	this.erase = function(){
+		var o = this.getCtxOffset();
+		Config.ctx.fillStyle = (this.y < Config.boardHeight ? Config.boardPlayingColor : Config.boardStagingColor);
+		Config.ctx.fillRect(o.x, o.y, Config.pointSize, Config.pointSize);
+	}
+}
+
+function Block(shape, position, rp, color){
 
 	this.shape = shape;
 	this.position = position; // Positions start at zero (upright) and increment as they rotate 45 degrees clockwise.
-	this.points = willbe_points;
+	this.rp = rp; // rp => reference point
+	this.points = Config.points.map(x => x) // just getting a copy of Config.Points
+		.map(x => Config.bo[shape][position][x].clone().applyOffset(rp.x, rp.y)); // getting point from configured block offsed descriptions and adding offset from rp (reference point)
+	this.color = color;
+
+	this.paint = function(){
+		for (var pi = 0; pi < this.points.length; pi++){ // bi => this.points index
+			this.points[pi].paint(this.color);
+		}
+	}
+
+	this.erase = function(){
+		for (var pi = 0; pi < this.points.length; pi++){ // bi => this.points index
+			this.points[pi].erase();
+		}
+	}
 }
 
-function Board(width, height, pointSize){
-	this.width = width;
-	this.height = height;
-	this.pointSize = pointSize;
-	
+function Board(){
+	this.blocks = [];
+	this.activeBlockIndex = null;
+ 
+	this.paintBackground = function(){
+		Config.ctx.fillStyle = Config.boardStagingColor;
+		Config.ctx.fillRect(0, 0, Config.boardWidth * Config.pointSize, Config.boardStagingHeight * Config.pointSize);
+
+		Config.ctx.fillStyle = Config.boardPlayingColor;
+		Config.ctx.fillRect(0, Config.boardStagingHeight * Config.pointSize, Config.boardWidth * Config.pointSize, Config.boardheightStagingHeight * Config.pointSize);
+	}
+
+	this.addBlock = function(){
+		var s = Config.shapes[Math.floor(Math.random()*Config.shapes.length)]; // shape
+		var p = Config.positions[Math.floor(Math.random()*Config.positions.length)]; // position
+		var c = Config.colors[Math.floor(Math.random()*Config.colors.length)]; // color
+		var rp = new Point(Math.floor(Config.boardWidth/2), Config.boardHeight + 2); // rp
+
+		this.blocks.push(new Block(s, p, rp, c));
+		this.activeBlockIndex = this.blocks.length - 1;
+	}
 }
