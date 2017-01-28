@@ -4,11 +4,11 @@ function Point(x, y, active = true){
 	this.active = active;
 
 	this.clone = function(){
-		return new Point(this.x, this.y, this.active);
+		return new Point(this.x, this.y);
 	}
 
 	this.applyOffset = function (x, y){
-		return new Point(x+this.x, y+this.y, this.active);
+		return new Point((x)+this.x, (y)+this.y);
 	}
 
 	this.getCtxOffset = function(){
@@ -40,7 +40,7 @@ function Block(shape, position, rp, color){
 	this.position = position; // Positions start at zero (upright) and increment as they rotate 45 degrees clockwise.
 	this.rp = rp; // rp => reference point
 	this.points = Config.points.map(x => x) // just getting a copy of Config.Points
-		.map(x => Config.bo[shape][position][x].clone().applyOffset(rp.x, rp.y)); // getting point from configured block offsed descriptions and adding offset from rp (reference point)
+		.map(x => Config.bo[shape][position][x].clone().applyOffset(rp.x, rp.y)); // getting point from configured block offset descriptions and adding offset from rp (reference point)
 	this.color = color;
 
 	this.paint = function(){
@@ -53,6 +53,54 @@ function Block(shape, position, rp, color){
 		for (var pi = 0; pi < this.points.length; pi++){ // bi => this.points index
 			this.points[pi].erase();
 		}
+	}
+
+	this.tryMove = function(dir, bb, abi){ // dir coresponds to arrows: u,d,l,r; bb => board.blocks; abi => activeBlockIndex
+
+		// figure out what the new points would be
+		ox = (dir == "l" ? -1 : dir == "r" ? 1 : 0);
+		oy = (dir == "d" ? -1 : 0);
+
+		var new_pos = this.position
+		if (dir == "u"){
+			new_pos = this.position == 3 ? 0 : this.position + 1;
+		}
+
+		var new_rp = this.rp.clone().applyOffset(ox, oy);
+		var newPoints = Config.points.map(x => x) // just getting a copy of Config.Points
+		.map(x => Config.bo[this.shape][new_pos][x].clone().applyOffset(new_rp.x, new_rp.y)); // getting point from configured block offset descriptions and adding offset from new_rp (new reference point)
+
+		// Check that the new points are allowed
+		for(var npi = 0; npi < newPoints.length; npi++){ // npi => newPoints index 
+			var onp = newPoints[npi]; // onp => one new point
+
+			// Check that it stays on the board
+			if (onp.y < 0)                  { return false; }
+			if (onp.x < 0)                  { return false; }
+			if (onp.x >= Config.boardWidth) { return false };
+
+			// Check against other blocks in board.blocks
+			for (var bbi = 0; bbi < bb.length; bbi++){ // bb => function parameter "bb"; bbi => board.blocks index
+				if (bbi != abi){ // abi => function parameter "abi"
+					var obb = bb[bbi]; // obb => one board block
+					for (var pi = 0; pi < obb.points.length; pi ++){ // pi => bb.points index
+						var op = obb.points[pi]; // op => one point
+						if (op.active == true){
+							if(onp.x == op.x && onp.y == op.y) { return false; }
+						}
+					}
+				}
+			}
+		}
+
+		// Move block if this function hasn't returned false by now (then return true)
+		this.erase();
+		this.rp = new_rp;
+		this.points = newPoints
+		this.position = new_pos;
+		this.paint();
+
+		return true;
 	}
 }
 
@@ -76,5 +124,29 @@ function Board(){
 
 		this.blocks.push(new Block(s, p, rp, c));
 		this.activeBlockIndex = this.blocks.length - 1;
+	}
+
+	this.takeMove = function(){
+		Config.movementLocked = true;
+
+		var success = this.blocks[this.activeBlockIndex].tryMove("d", this.blocks, this.activeBlockIndex);
+		if (!success){ this.activeBlockIndex = null; }
+
+
+		Config.movementLocked = false;
+	}
+
+	this.isGameOver = function(){
+		for(var bi = 0; bi < this.blocks.length; bi++){
+			var b = this.blocks[bi];
+			for(var pi = 0; pi < b.points.length; pi++){
+				if (pi != this.activeBlockIndex){
+					var p = b.points[pi];
+					if (p.active == false && p.y >= Config.boardHeight){ return true; }
+				}
+			}
+		}
+
+		return false;
 	}
 }

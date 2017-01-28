@@ -1,5 +1,6 @@
 var Config = {
 	// Board
+	board: null,
 	boardWidth: 10,
 	boardHeight: 20,
 	pointSize: 30,
@@ -17,7 +18,14 @@ var Config = {
 	shapes: ["I", "J", "L", "O", "S", "T", "Z"],
 	positions: [0,1,2,3],
 	points: [0,1,2,3],
-	colors: ["red", "blue", "green", "orange", "brown", "purple", "yellow"]
+	colors: ["red", "blue", "green", "orange", "brown", "purple", "yellow"],
+
+	// Game
+	cycleCount: 0,
+	isGameOver: false,
+	interval: null,
+	intervalLength: 500,
+	movementLocked: false
 
 
 }
@@ -28,3 +36,4 @@ Config.ctx = Config.canvas.getContext("2d");
 Config.ctx.lineWidth = Config.lineWidth;
 Config.canvas.width = Config.pointSize * Config.boardWidth;
 Config.canvas.height = Config.pointSize * (Config.boardHeight + Config.boardStagingHeight);
+
