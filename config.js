@@ -28,6 +28,7 @@ var Config = {
 	movementLocked: false,
 	score: 0,
 	scoreElement: document.getElementById("score-value"),
+	gameOverElement: document.getElementById("game-over"),
 
 	// Debug
 	debug: {

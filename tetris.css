@@ -19,3 +19,16 @@ body {
 	font-size:.75;
 	font-weight:bold;
 }
+
+#game-over{
+	font-size:2em;
+	position:absolute;
+	display:none;
+	width:100%;
+	font-family: Arial;
+	font-weight:bold;
+	color:white;
+	z-index:100;
+	background-color:rgba(0, 100, 100, 0.8);
+
+}

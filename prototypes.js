@@ -210,19 +210,28 @@ function Board(){
 		e.textContent = s;
 	}
 
-
-
 	this.isGameOver = function(){
 		for(var bi = 0; bi < this.blocks.length; bi++){
-			var b = this.blocks[bi];
-			for(var pi = 0; pi < b.points.length; pi++){
-				if (pi != this.activeBlockIndex){
+			if (bi != this.activeBlockIndex){
+				var b = this.blocks[bi];
+				for(var pi = 0; pi < b.points.length; pi++){
 					var p = b.points[pi];
-					if (p.active == false && p.y >= Config.boardHeight){ return true; }
+					if (p.active == true && p.y >= Config.boardHeight){ return true; }
 				}
 			}
 		}
 
 		return false;
+	}
+
+	this.gameOver = function(){
+		clearInterval(Config.interval);
+		var e = Config.gameOverElement;
+		e.style.display = "block";
+		s = (Config.boardHeight * Config.pointSize)/2;
+		s = s.toString();
+		s = s + "px";
+
+		e.style.top = s;
 	}
 }
