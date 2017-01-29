@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+	<link type="text/css" rel="stylesheet" href="tetris.css" >
+<body>
+
+	<h1>TETRIS</h1>
+	<div class="canvas-container">
+		<p id="score">SCORE: <span id="score-value">00000000</span></p>
+		<canvas id="canvas"></canvas>
+	</div>
+	
+	<div id="game-over">
+		<p>GAME OVER</p>
+		<p>
+			<button onclick="window.location.reload();" autofocus>Play again?</button>
+		</p>
+	</div>
+
+
+	<!-- Scripts -->
+	<script src="prototypes.js"></script>
+	<script src="blockOffsets.js"></script>
+	<script src="config.js"></script>
+	<script src="controls.js"></script>
+	<script src="main.js"></script>
+
+	<!-- Kick off Script -->
+	<script>
+		window.onkeydown = checkKey;
+		Config.interval = setInterval(main, Config.intervalLength);
+	</script>
+</body>
+</html>
