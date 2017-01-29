@@ -116,6 +116,14 @@ function Board(){
 		Config.ctx.fillRect(0, Config.boardStagingHeight * Config.pointSize, Config.boardWidth * Config.pointSize, Config.boardheightStagingHeight * Config.pointSize);
 	}
 
+	this.paintBlocks = function(){
+		for(var bi = 0; bi < this.blocks.length; bi++){
+			b = this.blocks[bi];
+			b.erase();
+			b.paint();
+		}
+	}
+
 	this.addBlock = function(){
 		var s = Config.shapes[Math.floor(Math.random()*Config.shapes.length)]; // shape
 		var p = Config.positions[Math.floor(Math.random()*Config.positions.length)]; // position
@@ -126,15 +134,83 @@ function Board(){
 		this.activeBlockIndex = this.blocks.length - 1;
 	}
 
-	this.takeMove = function(){
+	this.gameMove = function(){
 		Config.movementLocked = true;
 
 		var success = this.blocks[this.activeBlockIndex].tryMove("d", this.blocks, this.activeBlockIndex);
 		if (!success){ this.activeBlockIndex = null; }
 
-
 		Config.movementLocked = false;
 	}
+
+	this.playerMove = function(dir){ // dir => u,d,l,r
+		if(!Config.movementLocked && this.activeBlockIndex != null){
+			this.blocks[this.activeBlockIndex].tryMove(dir, this.blocks, this.activeBlockIndex);
+		}
+	}
+
+	this.checkForFullRows = function(){
+
+		// gather active points from non-active blocks into rows
+		var rows = [];
+		for (var i = 0; i < Config.boardHeight; i++) {rows[rows.length] = [];}
+
+		for (var bi = 0; bi < this.blocks.length; bi++){
+			if (bi != this.activeBlockIndex){
+				b = this.blocks[bi];
+				for(var pi = 0; pi < b.points.length; pi++){
+					p = b.points[pi];
+					if(p.active == true){
+						var row = rows[p.y];
+						row[row.length] = p;
+					}
+				}
+			}
+		}
+
+		// move points down
+		for (var ri = 0; ri < rows.length; ri++){
+			var r = rows[ri];
+
+			Config.debug.rowCounts[ri] = r.length;
+
+			if (r.length == Config.boardWidth){
+				// remove these points
+				for(var i = 0; i < r.length; i++){
+					p = r[i];
+					p.active = false;
+				}
+
+				// add score points
+				this.addScorePoints(Config.boardWidth);
+
+				// shift higher rows down
+				for(var i = ri+1; i < rows.length; i++){
+					var points = rows[i];
+					for (var pi = 0; pi < points.length; pi++){
+						p = points[pi];
+						p.erase();
+						p.y--;
+					}
+				}
+			}
+		}
+
+		// paint board
+		this.paintBlocks();
+	}
+
+	this.addScorePoints = function(ammount){
+		Config.score = Config.score + ammount
+
+		var nss = Config.score.toString();
+		var s = "0".repeat(8 - nss.length) + nss;
+
+		var e = Config.scoreElement;
+		e.textContent = s;
+	}
+
+
 
 	this.isGameOver = function(){
 		for(var bi = 0; bi < this.blocks.length; bi++){

@@ -14,7 +14,7 @@ body {
 	border:1px solid black;
 }
 
-.score{
+#score{
 	margin:0;
 	font-size:.75;
 	font-weight:bold;

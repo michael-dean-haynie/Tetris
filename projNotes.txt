@@ -2,7 +2,7 @@
 --- PROJECT NOTES --------------------------------
 --------------------------------------------------
 
-pu@ create a board, have it add it's own blocks, then start putting together main()
+pu@ check for full rows (recursive?)
 
 --- SHAPES/POSITIONS ----------------------------- ["I", "J", "L", "O", "S", "T", "Z"]
 

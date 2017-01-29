@@ -9,9 +9,11 @@ function main(){
 
 	if (Config.board.activeBlockIndex == null){ 
 		Config.board.addBlock();
-	} else {
-		Config.board.takeMove();
 	}
+	
+	Config.board.gameMove();
+	Config.board.checkForFullRows();
+
 
 
 

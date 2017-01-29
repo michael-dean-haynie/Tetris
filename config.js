@@ -25,7 +25,14 @@ var Config = {
 	isGameOver: false,
 	interval: null,
 	intervalLength: 500,
-	movementLocked: false
+	movementLocked: false,
+	score: 0,
+	scoreElement: document.getElementById("score-value"),
+
+	// Debug
+	debug: {
+		rowCounts: [],
+	},
 
 
 }

@@ -7,7 +7,7 @@
 
 	<h1>TETRIS</h1>
 	<div class="canvas-container">
-		<p class="score">SCORE: 00000000</p>
+		<p id="score">SCORE: <span id="score-value">00000000</span></p>
 		<canvas id="canvas"></canvas>
 	</div>
 	
@@ -17,11 +17,12 @@
 	<script src="prototypes.js"></script>
 	<script src="blockOffsets.js"></script>
 	<script src="config.js"></script>
+	<script src="controls.js"></script>
 	<script src="main.js"></script>
 
 	<!-- Kick off Script -->
 	<script>
-		// listen for arrow keys
+		window.onkeydown = checkKey;
 		Config.interval = setInterval(main, Config.intervalLength);
 	</script>
 </body>
